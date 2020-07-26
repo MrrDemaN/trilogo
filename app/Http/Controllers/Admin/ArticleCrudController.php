@@ -29,15 +29,38 @@ class ArticleCrudController extends CrudController
         CRUD::setModel(\App\Models\Article::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/article');
         CRUD::setEntityNameStrings('article', 'articles');
-        $this->crud->addFilter([ // simple filter
-          'type' => 'text',
-          'name' => 'name',
-          'label'=> 'Name'
-        ],
-        false,
-        function($value) { // if the filter is active
-            $this->crud->addClause('where', 'name', 'LIKE', "%$value%");
-        } );
+        $this->crud->addFilter([ // select2 filter
+          'name' => 'category_id',
+          'type' => 'select2',
+          'label'=> 'Category'
+        ], function() {
+            return \App\Models\Category::all()->pluck('name', 'id')->toArray();
+        }, function($value) { // if the filter is active
+                $this->crud->addClause('where', 'category_id', $value);
+        });
+        $this->crud->addFilter([ // select2_multiple filter
+          'name' => 'categories',
+          'type' => 'select2_multiple',
+          'label'=> 'Сategories'
+        ], function() { // the options that show up in the select2
+            return \App\Models\Category::all()->pluck('name', 'id')->toArray();
+        }, function($values) { // if the filter is active
+            foreach (json_decode($values) as $key => $value) {
+                $this->crud->query = $this->crud->query->whereHas('categories', function ($query) use ($value) {
+                    $query->where('category_id', $value);
+                });
+            }
+        });
+        $this->crud->addField([
+            'label' => "categories",
+            'type' => 'select2_multiple',
+            'name' => 'categories',
+            'entity' => 'categories',
+            'attribute' => 'name',
+            'pivot' => true,
+        ]);
+
+
     }
 
     /**
@@ -49,11 +72,12 @@ class ArticleCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::column('category_id');
+        CRUD::column('categories');
         CRUD::column('content');
         CRUD::column('created_at');
         CRUD::column('deleted_at');
         CRUD::column('descriptoin');
-        CRUD::column('meta_heads');
+        CRUD::column('meta_title');
         CRUD::column('meta_name');
         CRUD::column('name');
         CRUD::column('slug');
@@ -80,7 +104,7 @@ class ArticleCrudController extends CrudController
         CRUD::field('category_id');
         CRUD::field('content');
         CRUD::field('descriptoin');
-        CRUD::field('meta_heads');
+        CRUD::field('meta_title');
         CRUD::field('meta_name');
         CRUD::field('name');
         CRUD::field('slug');

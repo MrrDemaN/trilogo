@@ -29,15 +29,6 @@ class CategoryCrudController extends CrudController
         CRUD::setModel(\App\Models\Category::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/category');
         CRUD::setEntityNameStrings('category', 'categories');
-        $this->crud->addFilter([ // simple filter
-          'type' => 'text',
-          'name' => 'name',
-          'label'=> 'Name'
-        ],
-        false,
-        function($value) { // if the filter is active
-            $this->crud->addClause('where', 'name', 'LIKE', "%$value%");
-        } );
     }
 
     /**
@@ -51,7 +42,7 @@ class CategoryCrudController extends CrudController
         CRUD::column('created_at');
         CRUD::column('deleted_at');
         CRUD::column('descriptoin');
-        CRUD::column('meta_heads');
+        CRUD::column('meta_title');
         CRUD::column('meta_name');
         CRUD::column('name');
         CRUD::column('slug');
@@ -76,7 +67,7 @@ class CategoryCrudController extends CrudController
         CRUD::setValidation(CategoryRequest::class);
 
         CRUD::field('descriptoin');
-        CRUD::field('meta_heads');
+        CRUD::field('meta_title');
         CRUD::field('meta_name');
         CRUD::field('name');
         CRUD::field('slug');

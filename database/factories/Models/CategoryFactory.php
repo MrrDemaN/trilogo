@@ -11,7 +11,7 @@ $factory->define(Category::class, function (Faker $faker) {
         'title' => $faker->sentence(4),
         'descriptoin' => $faker->word,
         'meta_name' => $faker->word,
-        'meta_heads' => $faker->unique()->word,
-        'slug' => $faker->unique()->slug,
+        'meta_title' => $faker->word,
+        'slug' => $faker->slug,
     ];
 });

@@ -1,6 +1,7 @@
 created:
-    - database/migrations/2020_07_26_151926_create_categories_table.php
-    - database/migrations/2020_07_26_151927_create_articles_table.php
+    - database/migrations/2020_07_26_205532_create_categories_table.php
+    - database/migrations/2020_07_26_205533_create_articles_table.php
+    - database/migrations/2020_07_26_205533_create_article_category_table.php
     - app/Models/Category.php
     - app/Models/Article.php
     - database/factories/Models/CategoryFactory.php
@@ -9,5 +10,5 @@ created:
     - database/seeds/CategorySeeder.php
 models:
     User: { name: string, email: string, email_verified_at: 'datetime nullable', password: string, remember_token: 'string:100 nullable' }
-    Models\Category: { name: string, title: string, descriptoin: string, meta_name: string, meta_heads: 'string unique', slug: string, timestamps: timestamps, softdeletes: softDeletes, relationships: { hasMany: Article } }
-    Models\Article: { category_id: 'id foreign', name: 'string:100', title: 'string:100', descriptoin: string, meta_name: string, meta_heads: 'string unique', slug: 'string unique default:''''', content: text, timestamps: timestamps, softdeletes: softDeletes }
+    Models\Category: { name: 'string:40', title: 'string:60', descriptoin: string, meta_name: string, meta_title: 'string unique', slug: 'string unique', timestamps: timestamps, softdeletes: softDeletes, relationships: { beLongsToMany: Article } }
+    Models\Article: { category_id: 'id foreign', name: 'string:40', title: 'string:60', descriptoin: string, meta_name: string, meta_title: 'string unique', slug: 'string unique', content: text, timestamps: timestamps, softdeletes: softDeletes, relationships: { beLongsToMany: Category } }

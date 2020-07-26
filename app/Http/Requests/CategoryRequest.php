@@ -26,18 +26,12 @@ class CategoryRequest extends FormRequest
     public function rules()
     {
         return [
-          //
-          // 'name',
-          // 'title',
-          // 'descriptoin',
-          // 'meta_name',
-          // 'meta_heads',
-          // 'slug',
+        
           'name' => 'unique:App\Models\Category,name|required|min:5|max:100',
           'title' => 'required|min:5|max:100',
           'descriptoin' => 'required',
           'meta_name' => 'required|min:5|max:255',
-          'meta_heads' => 'required|min:5|max:255',
+          'meta_title' => 'required|min:5|max:255',
           'slug' => 'required|min:5|max:255'
 
         ];

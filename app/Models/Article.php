@@ -21,7 +21,7 @@ class Article extends Model
         'title',
         'descriptoin',
         'meta_name',
-        'meta_heads',
+        'meta_title',
         'slug',
         'content',
     ];
@@ -36,6 +36,11 @@ class Article extends Model
         'category_id' => 'integer',
     ];
 
+
+    public function categories()
+    {
+        return $this->belongsToMany(\App\Models\Category::class);
+    }
 
     public function category()
     {

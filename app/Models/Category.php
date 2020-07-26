@@ -20,7 +20,7 @@ class Category extends Model
         'title',
         'descriptoin',
         'meta_name',
-        'meta_heads',
+        'meta_title',
         'slug',
     ];
 
@@ -36,6 +36,6 @@ class Category extends Model
 
     public function articles()
     {
-        return $this->hasMany(\App\Models\Article::class);
+        return $this->belongsToMany(\App\Models\Article::class);
     }
 }

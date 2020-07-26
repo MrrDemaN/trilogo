@@ -1,28 +1,28 @@
 models:
-    Models\Category:
-      name: string
-      title: string
+    Models\Category:      
+      name: string:40
+      title: string:60
       descriptoin: string
       meta_name: string
-      meta_heads: string unique
+      meta_title: string unique
       slug: string unique
       timestamps: true
       softDeletes: true
       relationships:
-          hasMany: Article
+          beLongsToMany: Article
 
     Models\Article:
       category_id: id foreign
-      name: string:100
-      title: string:100
+      name: string:40
+      title: string:60
       descriptoin: string
       meta_name: string
-      meta_heads: string unique
+      meta_title: string unique
       slug: string unique
       content: text
       timestamps: true
       softDeletes: true
-
-
+      relationships:
+          beLongsToMany: Category
 
 seeders: Article, Category

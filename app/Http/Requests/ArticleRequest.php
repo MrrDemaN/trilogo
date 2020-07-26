@@ -25,22 +25,15 @@ class ArticleRequest extends FormRequest
      */
     public function rules()
     {
-      // 'name',
-      // 'title',
-      // 'descriptoin',
-      // 'meta_name',
-      // 'meta_heads',
-      // 'slug',
-      // 'content',
-      // //
+
         return [
              'name' => 'unique:App\Models\Article,name|required|min:5|max:100',
              'title' => 'required|min:5|max:100',
-             'descriptoin' => 'required',
+             'descriptoin' => 'required|min:5|max:70',
              'meta_name' => 'required|min:5|max:255',
-             'meta_heads' => 'required|min:5|max:255',
+             'meta_title' => 'required|min:5|max:255',
              'slug' => 'required|min:5|max:255',
-             'content' => 'required|min:5|max:255'
+             'content' => 'required'
 
         ];
     }
