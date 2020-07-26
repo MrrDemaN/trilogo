@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\Http\Requests\Request;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ArticleRequest extends FormRequest
+class UpdateCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,15 +25,14 @@ class ArticleRequest extends FormRequest
      */
     public function rules()
     {
-
         return [
-             'name' => 'unique:App\Models\Article,name|required|min:2|max:30',
-             'title' => 'required|min:2|max:20',
-             'descriptoin' => 'required|min:2|max:70',
-             'meta_name' => 'required|min:2|max:30',
-             'meta_title' => 'required|min:2|max:70',
-             'slug' => 'unique:App\Models\Category,slug|required|min:5|max:100'
-             'content' => 'required'
+
+          'name' => 'required|min:2|max:30',
+          'title' => 'required|min:2|max:20',
+          'descriptoin' => 'required|min:2|max:70',
+          'meta_name' => 'required|min:2|max:30',
+          'meta_title' => 'required|min:2|max:70',
+          'slug' => 'required|min:5|max:100'
 
         ];
     }

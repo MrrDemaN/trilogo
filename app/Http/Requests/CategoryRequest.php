@@ -26,13 +26,13 @@ class CategoryRequest extends FormRequest
     public function rules()
     {
         return [
-        
-          'name' => 'unique:App\Models\Category,name|required|min:5|max:100',
-          'title' => 'required|min:5|max:100',
-          'descriptoin' => 'required',
-          'meta_name' => 'required|min:5|max:255',
-          'meta_title' => 'required|min:5|max:255',
-          'slug' => 'required|min:5|max:255'
+
+          'name' => 'unique:App\Models\Category,name|required|min:2|max:30',
+          'title' => 'required|min:2|max:20',
+          'descriptoin' => 'required|min:2|max:70',
+          'meta_name' => 'required|min:2|max:30',
+          'meta_title' => 'required|min:2|max:70',
+          'slug' => 'unique:App\Models\Category,slug|required|min:5|max:100'
 
         ];
     }

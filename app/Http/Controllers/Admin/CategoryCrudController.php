@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\CategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -39,15 +40,15 @@ class CategoryCrudController extends CrudController
      */
     protected function setupListOperation()
     {
+        CRUD::column('name');
+        CRUD::column('title');
+        CRUD::column('descriptoin');
+        CRUD::column('meta_name');
+        CRUD::column('meta_title');
+        CRUD::column('slug');        
+        CRUD::column('updated_at');
         CRUD::column('created_at');
         CRUD::column('deleted_at');
-        CRUD::column('descriptoin');
-        CRUD::column('meta_title');
-        CRUD::column('meta_name');
-        CRUD::column('name');
-        CRUD::column('slug');
-        CRUD::column('title');
-        CRUD::column('updated_at');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -66,12 +67,12 @@ class CategoryCrudController extends CrudController
     {
         CRUD::setValidation(CategoryRequest::class);
 
-        CRUD::field('descriptoin');
-        CRUD::field('meta_title');
-        CRUD::field('meta_name');
         CRUD::field('name');
-        CRUD::field('slug');
         CRUD::field('title');
+        CRUD::field('descriptoin');
+        CRUD::field('meta_name');
+        CRUD::field('meta_title');
+        CRUD::field('slug');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
@@ -88,6 +89,16 @@ class CategoryCrudController extends CrudController
      */
     protected function setupUpdateOperation()
     {
-        $this->setupCreateOperation();
+        CRUD::setValidation(UpdateCategoryRequest::class);
+
+        CRUD::field('name');
+        CRUD::field('title');
+        CRUD::field('descriptoin');
+        CRUD::field('meta_name');
+        CRUD::field('meta_title');
+        CRUD::field('slug');
+
+
+        //$this->setupCreateOperation();
     }
 }

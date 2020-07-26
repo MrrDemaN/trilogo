@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\ArticleRequest;
+use App\Http\Requests\UpdateArticleRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -45,7 +46,7 @@ class ArticleCrudController extends CrudController
         ], function() { // the options that show up in the select2
             return \App\Models\Category::all()->pluck('name', 'id')->toArray();
         }, function($values) { // if the filter is active
-            foreach (json_decode($values) as $key => $value) {
+            foreach ($values as $key => $value) {
                 $this->crud->query = $this->crud->query->whereHas('categories', function ($query) use ($value) {
                     $query->where('category_id', $value);
                 });
@@ -71,17 +72,17 @@ class ArticleCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('category_id');
-        CRUD::column('categories');
-        CRUD::column('content');
-        CRUD::column('created_at');
-        CRUD::column('deleted_at');
+        CRUD::column('name');
+        CRUD::column('title');
         CRUD::column('descriptoin');
+        CRUD::column('content');
         CRUD::column('meta_title');
         CRUD::column('meta_name');
-        CRUD::column('name');
         CRUD::column('slug');
-        CRUD::column('title');
+        CRUD::column('category_id');
+        CRUD::column('categories');
+        CRUD::column('created_at');
+        CRUD::column('deleted_at');
         CRUD::column('updated_at');
 
         /**
@@ -92,39 +93,45 @@ class ArticleCrudController extends CrudController
     }
 
     /**
-     * Define what happens when the Create operation is loaded.
-     *
-     * @see https://backpackforlaravel.com/docs/crud-operation-create
-     * @return void
-     */
-    protected function setupCreateOperation()
-    {
-        CRUD::setValidation(ArticleRequest::class);
+       * Define what happens when the Create operation is loaded.
+       *
+       * @see https://backpackforlaravel.com/docs/crud-operation-create
+       * @return void
+       */
+      protected function setupCreateOperation()
+      {
+          //Тут валидатор для create
+          CRUD::setValidation(ArticleRequest::class);
 
-        CRUD::field('category_id');
-        CRUD::field('content');
-        CRUD::field('descriptoin');
-        CRUD::field('meta_title');
-        CRUD::field('meta_name');
-        CRUD::field('name');
-        CRUD::field('slug');
-        CRUD::field('title');
+          CRUD::field('category_id');
+          CRUD::field('name');
+          CRUD::field('title');
+          CRUD::field('descriptoin');
+          CRUD::field('content');
+          CRUD::field('meta_name');
+          CRUD::field('meta_title');
+          CRUD::field('slug');
+      }
 
-        /**
-         * Fields can be defined using the fluent syntax or array syntax:
-         * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number']));
-         */
-    }
+      /**
+       * Define what happens when the Update operation is loaded.
+       *
+       * @see https://backpackforlaravel.com/docs/crud-operation-update
+       * @return void
+       */
+      protected function setupUpdateOperation()
+      {
+          //Тут валидатор для апдейта
+          CRUD::setValidation(UpdateArticleRequest::class);
 
-    /**
-     * Define what happens when the Update operation is loaded.
-     *
-     * @see https://backpackforlaravel.com/docs/crud-operation-update
-     * @return void
-     */
-    protected function setupUpdateOperation()
-    {
-        $this->setupCreateOperation();
-    }
+          CRUD::field('category_id');
+          CRUD::field('name');
+          CRUD::field('title');
+          CRUD::field('descriptoin');
+          CRUD::field('content');
+          CRUD::field('meta_name');
+          CRUD::field('meta_title');
+          CRUD::field('slug');
+      }
+
 }
