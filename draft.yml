@@ -1,0 +1,28 @@
+models:
+    Models\Category:
+      name: string
+      title: string
+      descriptoin: string
+      meta_name: string
+      meta_heads: string unique
+      slug: string unique
+      timestamps: true
+      softDeletes: true
+      relationships:
+          hasMany: Article
+
+    Models\Article:
+      category_id: id foreign
+      name: string:100
+      title: string:100
+      descriptoin: string
+      meta_name: string
+      meta_heads: string unique
+      slug: string unique
+      content: text
+      timestamps: true
+      softDeletes: true
+
+
+
+seeders: Article, Category

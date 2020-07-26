@@ -1,0 +1,13 @@
+created:
+    - database/migrations/2020_07_26_151926_create_categories_table.php
+    - database/migrations/2020_07_26_151927_create_articles_table.php
+    - app/Models/Category.php
+    - app/Models/Article.php
+    - database/factories/Models/CategoryFactory.php
+    - database/factories/Models/ArticleFactory.php
+    - database/seeds/ArticleSeeder.php
+    - database/seeds/CategorySeeder.php
+models:
+    User: { name: string, email: string, email_verified_at: 'datetime nullable', password: string, remember_token: 'string:100 nullable' }
+    Models\Category: { name: string, title: string, descriptoin: string, meta_name: string, meta_heads: 'string unique', slug: string, timestamps: timestamps, softdeletes: softDeletes, relationships: { hasMany: Article } }
+    Models\Article: { category_id: 'id foreign', name: 'string:100', title: 'string:100', descriptoin: string, meta_name: string, meta_heads: 'string unique', slug: 'string unique default:''''', content: text, timestamps: timestamps, softdeletes: softDeletes }
