@@ -28,10 +28,10 @@ class ArticleRequest extends FormRequest
 
         return [
              'name' => 'unique:App\Models\Article,name|required|min:2|max:30',
-             'title' => 'required|min:2|max:70',
+             'title' => 'required|min:50|max:70',
              'descriptoin' => 'required|min:2|max:70',
              'meta_name' => 'required|min:2|max:30',
-             'meta_title' => 'required|min:2|max:70',
+             'meta_title' => 'required|min:50|max:70',
              'slug' => 'unique:App\Models\Category,slug|required|min:5|max:100',
              'content' => 'required'
 
