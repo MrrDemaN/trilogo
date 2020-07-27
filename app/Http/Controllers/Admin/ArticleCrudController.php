@@ -72,6 +72,8 @@ class ArticleCrudController extends CrudController
      */
     protected function setupListOperation()
     {
+        CRUD::column('category_id');
+        CRUD::column('categories');
         CRUD::column('name');
         CRUD::column('title');
         CRUD::column('descriptoin');
@@ -79,8 +81,6 @@ class ArticleCrudController extends CrudController
         CRUD::column('meta_title');
         CRUD::column('meta_name');
         CRUD::column('slug');
-        CRUD::column('category_id');
-        CRUD::column('categories');
         CRUD::column('created_at');
         CRUD::column('deleted_at');
         CRUD::column('updated_at');

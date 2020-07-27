@@ -32,7 +32,7 @@ class ArticleRequest extends FormRequest
              'descriptoin' => 'required|min:2|max:70',
              'meta_name' => 'required|min:2|max:30',
              'meta_title' => 'required|min:2|max:70',
-             'slug' => 'unique:App\Models\Category,slug|required|min:5|max:100'
+             'slug' => 'unique:App\Models\Category,slug|required|min:5|max:100',
              'content' => 'required'
 
         ];
